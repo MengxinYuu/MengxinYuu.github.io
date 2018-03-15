@@ -1,0 +1,39 @@
+/*font*/
+*{
+font-family: 'Quicksand', sans-serif;
+}
+.display-4{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400; 
+}
+header{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+}
+footer{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+}
+
+
+/*color*/
+.myjumbo .jumbotron{
+    background-color: #FBF1EB;
+}
+span{
+    color:#71b9a9;
+}
+.copyright{
+    color:#fff;
+}
+
+/*layout*/
+footer{
+    display:block;
+    background-color: #333;
+    margin:50px 0 0 0;
+    padding:30px;
+}
+
+
+
