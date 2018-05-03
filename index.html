@@ -11,19 +11,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
         <!--font-->
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
-
-    </head>    
+        
+        <!-- barrager-->
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="dist/css/barrager.css">
+        <link rel="stylesheet" type="text/css" href="static/pick-a-color/css/pick-a-color-1.2.3.min.css">
+        <link type="text/css" rel="stylesheet" href="static/syntaxhighlighter/styles/shCoreDefault.css"/>
+    </head>  
+      
     <body>
-<!--
-        <header>
-            <nav class="navbar navbar-dark bg-dark">
-              <a class="navbar-brand" href="#">TOOLS FOR ONLINE LEARNING</a>
-            </nav>
-        </header>
--->
         <main>
             <div class="myjumbo">
                  <div class="jumbotron jumbotron-fluid">
@@ -40,9 +41,157 @@
                 </div>
                 </div>
             </div>
+        
+        
+        <!--barrager area-->
+        <div class="container">
+        <section id="custom" class="bb-section">
+            <div class="row">
+                <div class="col-md-6">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" >Message</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" name="info" type="text" placeholder="Write down your message"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" >Color</label>
+                            <div class="col-sm-6">
+                                <input type="text" value="fff" name="color" class="pick-a-color form-control">
+                            </div>
+                        </div>
+                    </form>
+                       
+                    <!--run or clear-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" ></label>
+                        <div class="col-sm-3">
+                            <button  class="btn btn-primary   bb-light-blue"  onclick="run()"> Run</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button  class="btn btn-warning   "  onclick="clear_barrage()"> Clear </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+         <div>
+                <h1 id="big"></h1>
+                <button onclick = "saveData()">Save data</button>
+        </div>
+            
         </main>
+        
         <footer>
-            <p class="copyright">©2017. All Rights reserved</p>   
+            <p class="copyright">©2017. All Rights reserved</p> 
+              
         </footer>
     </body>
+    
+    
+<!-- script-->
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>   
+    <script type="text/javascript" src="static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/js/tinycolor-0.9.15.min.js"></script>
+    <script type="text/javascript" src="dist/js/jquery.barrager.js"></script>
+    <script type="text/javascript" src="static/pick-a-color/js/pick-a-color-1.2.3.min.js"></script>  
+    <script type="text/javascript">
+        
+    // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyDPyuRfiBlKp1qqCjOZhn7ZeXlBrAh1WI0",
+            authDomain: "tolfinal.firebaseapp.com",
+            databaseURL: "https://tolfinal.firebaseio.com",
+            projectId: "tolfinal",
+            storageBucket: "tolfinal.appspot.com",
+            messagingSenderId: "730675891294"
+          };
+          firebase.initializeApp(config);
+        
+    //savedata
+         function saveData(){
+             firebase.database().ref('newuser').push({
+                 username:"tryyyyy",
+                 email: "333"
+             });
+         }
+
+    String.prototype.format = function(args) {
+        var result = this;
+        if (arguments.length < 1) {
+            return result;
+        }
+        var data = arguments;        
+        if (arguments.length == 1 && typeof (args) == "object") {
+            data = args;
+        }
+        for (var key in data) {
+            var value = data[key];
+            if (undefined != value) {
+                result = result.replace("{" + key + "}", value);
+            }
+        }
+        return result;
+    }
+    
+    var  barrager_code=
+        'var item={\n'+
+        "   img:'{img}', //图片 \n"+
+        "   info:'{info}', //文字 \n"+
+        "   href:'{href}', //链接 \n"+
+        "   close:{close}, //显示关闭按钮 \n"+
+        "   speed:{speed}, //延迟,单位秒,默认6 \n"+
+        "   bottom:{bottom}, //距离底部高度,单位px,默认随机 \n"+
+        "   color:'{color}', //颜色,默认白色 \n"+
+        "   old_ie_color:'{old_ie_color}', //ie低版兼容色,不能与网页背景相同,默认黑色 \n"+
+        " }\n"+
+        "$('body').barrager(item);"
+        ;
+
+ 
+    function  run(){
+        var  info=$('input[name=info]').val();
+        //if no message
+        if (info==''){
+            alert("please write down your message");
+            return;
+        }
+        var  href=$('input[name=href]').val();
+        var  speed=3;
+        var  code=barrager_code;
+        var  window_height=$(window).height()-150;
+        var bottom=Math.floor(Math.random()*window_height+40);
+        
+ 
+        var  item={
+                'info':info,
+                'href':href,
+                'close':true,
+                'speed':speed,
+                'bottom':bottom,
+                'color':'#'+$('input[name=color').val(),
+                'old_ie_color':'#'+$('input[name=color]').val()
+
+                };
+        code=code.format(item);
+        console.log(code);
+        $('#barrager-code').val(code);
+        eval(code);
+        saveData();
+
+    }
+
+    function  clear_barrage(){
+
+        $.fn.barrager.removeAll();
+    }
+
+    </script>
 </html>
+
+
+
+
