@@ -63,11 +63,14 @@
                 <div class="col-md-12">     
                     <div class="form-group">
                         <div class="col-sm-4"></div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <button  class="btn btn-primary   bb-light-blue"  onclick="run()"> Ask question</button>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <button  class="btn btn-warning   "  onclick="clear_barrage()"> Block all questions</button>
+                        </div>
+                        <div class="col-sm-2" id="data">
+                            <button  class="btn btn-warning   "  onclick="getData()">Check previous questions</button>
                         </div>
                     </div>
                 </div>
@@ -112,21 +115,16 @@
         
     //get data from database
        function getData(){
-        
           var ref = firebase.database().ref('message/');
           ref.on("value", function(data) {
-               var message = data.val();
-               var keys = Object.keys(message);
-              console.log(keys);
+             const messages = Object.entries(data.val()).map(function([i, d]) { 
+                 return d.information;
+             })
+             for (var i=0; i<messages.length; i++){
+                 runRetrievedData(messages[i]);
+             }
+             console.log(messages);
             })
-           var i;
-           for (i=0; i<keys.length; i++){
-                console.log("###dasfa");
-               var k=keys[i];
-               console.log("###");
-               var questions=message[k].information;
-               console.log(questions);
-           }
        }
         
 
@@ -165,6 +163,32 @@
         ;
 
  
+        //retrieved barrager
+    function  runRetrievedData(information){
+        var  info=information;
+        var  href='';
+        var  speed=3;
+        var  code=barrager_code;
+        var  window_height=$(window).height()-150;
+        var bottom=Math.floor(Math.random()*window_height+40);
+        
+ 
+        var  item={
+                'info':info,
+                'href':href,
+                'close':true,
+                'speed':speed,
+                'bottom':bottom,
+                'color':'',
+                'old_ie_color':''
+
+                };
+        code=code.format(item);
+        eval(code);
+
+    }
+        
+        
     function  run(){
         var  info=$('input[name=info]').val();
         //if no message
@@ -185,7 +209,7 @@
                 'close':true,
                 'speed':speed,
                 'bottom':bottom,
-                'color':'#'+$('input[name=color').val(),
+                'color':'#'+$('input[name=color]').val(),
                 'old_ie_color':'#'+$('input[name=color]').val()
 
                 };
