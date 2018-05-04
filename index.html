@@ -17,11 +17,9 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
         
         <!-- barrager-->
-        <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="static/css/style.css" />
-        <link rel="stylesheet" type="text/css" href="dist/css/barrager.css">
-        <link rel="stylesheet" type="text/css" href="static/pick-a-color/css/pick-a-color-1.2.3.min.css">
-        <link type="text/css" rel="stylesheet" href="static/syntaxhighlighter/styles/shCoreDefault.css"/>
+        <link rel="stylesheet" type="text/css" href="css/theme_css/bootstrap.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="css/theme_css/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/barrager_css/barrager.css"/>
     </head>  
       
     <body>
@@ -30,7 +28,9 @@
                  <div class="jumbotron jumbotron-fluid">
                   <div class="container">
                     <h1 class="display-4">TOOLS FOR ONLINE LEARNING</h1>
-                    <p class="lead">Here we will show an interactive video produced by <span>Mianhong Chen</span> and <span>Mengxin Yu</span>   :) </p>
+                    <h4> 1) hover the barrager to see others' questions</h4>
+                    <h4> 2) click the barrager to answer others' questions</h4>
+                    <h4> 3) Enjoy the  interactive video !</h4>
                   </div>
                 </div>
             </div>
@@ -47,41 +47,33 @@
         <div class="container">
         <section id="custom" class="bb-section">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" >Message</label>
+                            <label class="col-sm-4 control-label" >Ask a question</label>
                             <div class="col-sm-6">
                                 <input class="form-control" name="info" type="text" placeholder="Write down your message"/>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" >Color</label>
-                            <div class="col-sm-6">
-                                <input type="text" value="fff" name="color" class="pick-a-color form-control">
-                            </div>
-                        </div>
                     </form>
-                       
-                    <!--run or clear-->
+                </div>
+            </div>
+            <!--run or clear-->
+            <div class="row">
+                <div class="col-md-12">     
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" ></label>
+                        <div class="col-sm-4"></div>
                         <div class="col-sm-3">
-                            <button  class="btn btn-primary   bb-light-blue"  onclick="run()"> Run</button>
+                            <button  class="btn btn-primary   bb-light-blue"  onclick="run()"> Ask question</button>
                         </div>
                         <div class="col-sm-3">
-                            <button  class="btn btn-warning   "  onclick="clear_barrage()"> Clear </button>
+                            <button  class="btn btn-warning   "  onclick="clear_barrage()"> Block all questions</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         </div>
-         <div>
-                <h1 id="big"></h1>
-                <button onclick = "saveData()">Save data</button>
-        </div>
-            
         </main>
         
         <footer>
@@ -92,14 +84,14 @@
     
     
 <!-- script-->
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>   
-    <script type="text/javascript" src="static/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="static/js/tinycolor-0.9.15.min.js"></script>
-    <script type="text/javascript" src="dist/js/jquery.barrager.js"></script>
-    <script type="text/javascript" src="static/pick-a-color/js/pick-a-color-1.2.3.min.js"></script>  
-    <script type="text/javascript">
-        
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.barrager.js"></script> 
+    <script type="text/javascript"></script>
+    <script>
+
+
     // Initialize Firebase
           var config = {
             apiKey: "AIzaSyDPyuRfiBlKp1qqCjOZhn7ZeXlBrAh1WI0",
@@ -111,14 +103,30 @@
           };
           firebase.initializeApp(config);
         
-    //savedata
-         function saveData(){
-             firebase.database().ref('newuser').push({
-                 username:"tryyyyy",
-                 email: "333"
+    //save data to database
+         function saveData(info){
+             firebase.database().ref('message').push({
+                 information:info
              });
          }
+        
+    //get data from database
+       function getData(){
+//        var questions = firebase.database().ref('message/' + '/information');
+//        var try = questions.val();
+//       }
+        
+          var ref = firebase.database().ref('message/information');
+            ref.on("value", function(snapshot) {
+               console.log(snapshot.val());
+            }, function (error) {
+               console.log("Error: " + error.code);
+            });
+       }
+        
 
+        
+     //ask a question  
     String.prototype.format = function(args) {
         var result = this;
         if (arguments.length < 1) {
@@ -177,10 +185,8 @@
 
                 };
         code=code.format(item);
-        console.log(code);
-        $('#barrager-code').val(code);
         eval(code);
-        saveData();
+        saveData(info);
 
     }
 

@@ -8,9 +8,12 @@
             color: '#fff'
         }, option || {});
 
+        
         var time = new Date().getTime();
         var barrager_id = 'barrage_' + time;
         var id = '#' + barrager_id;
+        
+        
         // 动态生成HTML
         var html = $("<div class='barrage'id=" + barrager_id + "></div>");
         $(this).append(html);
@@ -54,7 +57,21 @@
         },function(){
             floatLeft();
         });
+        
+        
+        
+        
+        barrage.click(function(){
+            var answer = prompt("Input your answer to this question :)");
+            // 动态生成HTML
+            $(this).append("<p>"+answer+"</p>").find('p').addClass('reply');
 
+        })
+
+        
+        
+        
+        
         barrage.on('click', function () {
             barrage.stop(true);
             floatLeft();
