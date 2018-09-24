@@ -1,232 +1,195 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <title>DEMO STARTER</title>
-        <meta charset="utf-8">
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <!--bootstrap-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-        <!--font-->
-        <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
-        
-        <!-- barrager-->
-        <link rel="stylesheet" type="text/css" href="css/theme_css/bootstrap.min.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="css/theme_css/css/style.css" />
-        <link rel="stylesheet" type="text/css" href="css/barrager_css/barrager.css"/>
-    </head>  
-      
-    <body>
-        <main>
-            <div class="myjumbo">
-                 <div class="jumbotron jumbotron-fluid">
-                  <div class="container">
-                    <h1 class="display-4">TOOLS FOR ONLINE LEARNING</h1>
-                    <h4> 1) hover the barrager to see others' questions</h4>
-                    <h4> 2) click the barrager to answer others' questions</h4>
-                    <h4> 3) Enjoy the  interactive video !</h4>
-                  </div>
-                </div>
-            </div>
-            <div class="videoArea">
-               <div class="container">
-                <div class="embed-responsive embed-responsive-16by9">
-                  <iframe width="854" height="480" class="embed-responsive-item" src="https://video.helloeko.com/v/VyO90z/embed?autoplay=true&publisherID=aWkbxP" frameborder="0" allowfullscreen></iframe>
-                </div>
-                </div>
-            </div>
-        
-        
-        <!--barrager area-->
-        <div class="container">
-        <section id="custom" class="bb-section">
-            <div class="row">
-                <div class="col-md-12">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" >Ask a question</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" name="info" type="text" placeholder="Write down your message"/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!--run or clear-->
-            <div class="row">
-                <div class="col-md-12">     
-                    <div class="form-group">
-                        <div class="col-sm-4"></div>
-                        <div class="col-sm-2">
-                            <button  class="btn btn-primary   bb-light-blue"  onclick="run()"> Ask question</button>
-                        </div>
-                        <div class="col-sm-2">
-                            <button  class="btn btn-warning   "  onclick="clear_barrage()"> Block all questions</button>
-                        </div>
-                        <div class="col-sm-2" id="data">
-                            <button  class="btn btn-warning   "  onclick="getData()">Check previous questions</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        </div>
-        </main>
-        
-        <footer>
-            <p class="copyright">©2017. All Rights reserved</p> 
-              
-        </footer>
-    </body>
-    
-    
-<!-- script-->
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
-    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.barrager.js"></script> 
-    <script type="text/javascript"></script>
-    <script>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mengxin Yu</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
 
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
 
-    // Initialize Firebase
-          var config = {
-            apiKey: "AIzaSyDPyuRfiBlKp1qqCjOZhn7ZeXlBrAh1WI0",
-            authDomain: "tolfinal.firebaseapp.com",
-            databaseURL: "https://tolfinal.firebaseio.com",
-            projectId: "tolfinal",
-            storageBucket: "tolfinal.appspot.com",
-            messagingSenderId: "730675891294"
-          };
-          firebase.initializeApp(config);
-        
-    //save data to database
-         function saveData(info){
-             firebase.database().ref('message').push({
-                 information:info
-             });
-         }
-        
-    //get data from database
-       function getData(){
-          var ref = firebase.database().ref('message/');
-          ref.on("value", function(data) {
-             const messages = Object.entries(data.val()).map(function([i, d]) { 
-                 return d.information;
-             })
-             for (var i=0; i<messages.length; i++){
-                 runRetrievedData(messages[i]);
-             }
-             console.log(messages);
-            })
-       }
-        
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
 
-        
-     //ask a question  
-    String.prototype.format = function(args) {
-        var result = this;
-        if (arguments.length < 1) {
-            return result;
-        }
-        var data = arguments;        
-        if (arguments.length == 1 && typeof (args) == "object") {
-            data = args;
-        }
-        for (var key in data) {
-            var value = data[key];
-            if (undefined != value) {
-                result = result.replace("{" + key + "}", value);
-            }
-        }
-        return result;
-    }
-    
-    var  barrager_code=
-        'var item={\n'+
-        "   img:'{img}', //picture \n"+
-        "   info:'{info}', //words \n"+
-        "   href:'{href}', //link \n"+
-        "   close:{close}, //显示关闭按钮 \n"+
-        "   speed:{speed}, //延迟,单位秒,默认6 \n"+
-        "   bottom:{bottom}, //距离底部高度,单位px,默认随机 \n"+
-        "   color:'{color}', //颜色,默认白色 \n"+
-        "   old_ie_color:'{old_ie_color}', //ie低版兼容色,不能与网页背景相同,默认黑色 \n"+
-        " }\n"+
-        "$('body').barrager(item);"
-        ;
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
 
- 
-        //retrieved barrager
-    function  runRetrievedData(information){
-        var  info=information;
-        var  href='';
-        var  speed=3;
-        var  code=barrager_code;
-        var  window_height=$(window).height()-150;
-        var bottom=Math.floor(Math.random()*window_height+40);
-        
- 
-        var  item={
-                'info':info,
-                'href':href,
-                'close':true,
-                'speed':speed,
-                'bottom':bottom,
-                'color':'',
-                'old_ie_color':''
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
 
-                };
-        code=code.format(item);
-        eval(code);
+	</head>
+	<body>
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
+			<h1 id="colorlib-logo"><a href="index.html"><span>Wo</span><span>rk</span></a></h1>
+			<nav id="colorlib-main-menu" role="navigation">
+				<ul>
+					<li class="colorlib-active"><a href="work.html">Work</a></li>
+					<li><a href="#">Doodle</a></li>
+					<li><a href="#">Resume</a></li>
+					<li><a href="#">About</a></li>
+					
+				</ul>
+			</nav>
 
-    }
-        
-        
-    function  run(){
-        var  info=$('input[name=info]').val();
-        //if no message
-        if (info==''){
-            alert("please write down your message");
-            return;
-        }
-        var  href=$('input[name=href]').val();
-        var  speed=3;
-        var  code=barrager_code;
-        var  window_height=$(window).height()-150;
-        var bottom=Math.floor(Math.random()*window_height+40);
-        
- 
-        var  item={
-                'info':info,
-                'href':href,
-                'close':true,
-                'speed':speed,
-                'bottom':bottom,
-                'color':'#'+$('input[name=color]').val(),
-                'old_ie_color':'#'+$('input[name=color]').val()
+			<div class="colorlib-footer">
+				<ul>
+					<li><a href="#"><i class="icon-facebook2"></i></a></li>
+					<li><a href="#"><i class="icon-twitter2"></i></a></li>
+					<li><a href="#"><i class="icon-instagram"></i></a></li>
+					<li><a href="#"><i class="icon-linkedin2"></i></a></li>
+				</ul>
+			</div>
 
-                };
-        code=code.format(item);
-        eval(code);
-        saveData(info);
+		</aside>
 
-    }
+		<div id="colorlib-main">
 
-    function  clear_barrage(){
+			<div class="colorlib-work">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-5 col-md-offset-2 col-md-pull-2">
+							<span class="heading-meta">Mengxin Yu</span>
+							<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft">UX designer / researcher</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+							<div class="project" style="background-image: url(images/comming%20soon.png);">
+								<div class="desc">
+									<div class="con">
+										<h3><a href="#">IDeATe Gallery</a></h3>
+										<span># Learning Media Design</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+							<div class="project" style="background-image: url(images/comming%20soon.png);">
+								<div class="desc">
+									<div class="con">
+										<h3><a href="#">Moodie</a></h3>
+										<span># Mobile App Design</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+							<div class="project" style="background-image: url(images/Houyi.png);" onclick= "location.href='SingleWork/Houyi.html';">
+								<div class="desc">
+									<div class="con">
+										<h3><a href="work-single.html">Houyi and Ten Suns</a></h3>
+										<span># VR game design </span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+							<div class="project" style="background-image: url(images/comming%20soon.png);">
+								<div class="desc">
+									<div class="con">
+										<h3><a href="#">WGU</a></h3>
+										<span># Web Design</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+							<div class="project" style="background-image: url(images/catfeeding.png)" onclick= "location.href='SingleWork/CatFeeding101.html';">
+								<div class="desc">
+									<div class="con">
+										<h3><a href="work-single.html">Cat Feeding 101</a></h3>
+										<span># E-learning course design<br># Learning experience design</span>
+									</div>
+                                </div>
+							</div>
+						</div>
+						<div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+							<div class="project" style="background-image: url(images/Cocktail%20party.png);" onclick= "location.href='SingleWork/CocktailParty.html';">
+								<div class="desc">
+									<div class="con">
+										<h3><a href="work-single.html">Cocktail Party</a></h3>
+										<span># Web design<br> # Data visualization</span>
+									</div>
+								</div>
+							</div>
+						</div>
+<!--
+						<div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+							<div class="project" style="background-image: url(images/work-7.jpg);">
+								<div class="desc">
+									<div class="con">
+										<h3><a href="work-single.html">Work 07</a></h3>
+										<span>Illustration, Logo</span>
+									</div>
+								</div>
+							</div>
+						</div>
+-->
+					</div>
+<!--
+					<div class="row">
+						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+							<ul class="pagination">
+								<li class="disabled"><a href="#">&laquo;</a></li>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">&raquo;</a></li>
+							</ul>
+						</div>
+					</div>
+-->
+				</div>
+			</div>
+		</div>
+	</div>
 
-        $.fn.barrager.removeAll();
-    }
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Sticky Kit -->
+	<script src="js/sticky-kit.min.js"></script>
+	
+	
+	<!-- MAIN JS -->
+	<script src="js/main.js"></script>
 
-    </script>
+	</body>
 </html>
-
-
-
 
