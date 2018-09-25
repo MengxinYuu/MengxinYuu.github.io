@@ -56,6 +56,10 @@
  * # base style overrides
  *
  * ------------------------------------------------------------------- */
+.1st-research {
+   padding-bottom:130px;!important
+}
+
 html {
   font-size: 10px;
 }
