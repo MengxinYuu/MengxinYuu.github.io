@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+* {
+    position: relative;
+    margin: 0;
+    font-family: 'Roboto', sans-serif; !important
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+.content_white {
+    padding-left: 55px;
+    padding-right: 55px;
+    padding-top:90px;
+    padding-bottom:90px;
+}
+.content_grey {
+    background: #f9f9f9;
+    padding-left: 55px;
+    padding-right: 55px;
+    padding-top:90px;
+    padding-bottom:90px;
+}
+h1 {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif; !important
+    font-style: inherit;
+    font-size: inherit;
+    font-weight: 400;
+    line-height: inherit;
+    vertical-align: baseline;
+    border: 0;
+    font-size: 1.6rem;
+    margin-bottom: .09615em;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: -.025em;
+    line-height: 1.5;
+    color: #000;
+}
+h2 {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif; !important
+    font-style: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    vertical-align: baseline;
+    border: 0;
+    font-size: 1.5rem;
+    margin-bottom: .5em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    letter-spacing: -.035em;
+    line-height: 1.5;
+    color: #9ea0a6;
+    margin-bottom: 1.25em;
+}
+p {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif; !important
+    font-style: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 2;
+    vertical-align: baseline;
+    border: 0;
+    font-size: 1rem;
+    color: #000;
+    letter-spacing: .025em;
+    line-height: 2;
+    font-weight: 300;
+    margin-bottom: 1.7em;
+}
+b{
+    padding-left:3px;
+    padding-right:3px;
+    font-family: 'Roboto', sans-serif; !important
+    font-weight:500;
+    color:white;
+    background-color: black;
+}
+.container {
+    align-items: center;
+}
